@@ -7,8 +7,67 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0"
+pydantic-settings = "^2.0.3"
+psycopg = "^3.1.12"
+sqlalchemy = "^2.0.23"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+pylint = "^3.0.2"
+black = "^23.10.1"
+isort = "^5.12.0"
+mypy = "^1.6.1"
+pre-commit = "^3.5.0"
+alembic = "^1.12.1"
+httpx = "^0.25.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+########## PYTEST
+[tool.pytest.ini_options]
+pythonpath = "src"
+
+########## BLACK
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include-trailing-comma = true
+
+########## ISORT
+[tool.isort]
+profile = 'black'
+
+########## MYPY
+[tool.mypy]
+warn_redundant_casts = true
+warn_unused_ignores = false
+check_untyped_defs = true
+ignore_missing_imports = true
+
+########## PYLINT
+[tool.pylint]
+load-plugins = [
+    "pylint.extensions.docparams",
+    "pylint.extensions.mccabe",
+    "pylint.extensions.redefined_variable_type",
+]
+disable = [
+    "import-error",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "too-many-instance-attributes",
+    "too-few-public-methods",
+]
+
+[tool.pylint.mccabe]
+min-similarity-lines = 10
+
+[tool.pylint.design]
+max-line-length = 88

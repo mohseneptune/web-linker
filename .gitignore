@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files / Caches / Logs
+__pycache__/
+*.py[cod]
+*$py.class
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Enviroment variables
+.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.pyc
+
+# Miscellaneous
+*.log
+*.bak
+*.swp
+
+# Container's data
+postgres_data/
