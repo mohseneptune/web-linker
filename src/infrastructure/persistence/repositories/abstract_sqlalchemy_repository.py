@@ -3,7 +3,7 @@ from typing import Generic, Optional, TypeVar
 
 from sqlalchemy.orm import Session
 
-from domain.models.base_entity import BaseEntity
+from domain.entities.base_entity import BaseEntity
 from domain.repository import AbstractRepository
 
 BaseEntityT = TypeVar("BaseEntityT", bound=BaseEntity)

@@ -6,7 +6,7 @@ virtualenv = .venv
 cleanup:
 	@find . -type d -name '*cache*' ! -path "./$(virtualenv)/*" -exec echo Removing {} \; -exec rm -rf {} +
 
-tree:
+tree: cleanup
 	@tree -a -I "$(virtualenv)|.git"
 
 run-fastapi-app:

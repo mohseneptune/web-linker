@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Dict, Generic, Type, TypeVar
 
-from domain.models.base_entity import BaseEntity
+from domain.entities.base_entity import BaseEntity
 from domain.repository import AbstractRepository
 
 BaseEntityT = TypeVar("BaseEntityT", bound=BaseEntity)
