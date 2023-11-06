@@ -1,4 +1,4 @@
 from .envarables import envariables
-from .settings import DATABASE_URI, DEBUG
+from .settings import DEBUG, POSTGRES_DATABASE_URI
 
-__all__ = ["envariables", "DEBUG", "DATABASE_URI"]
+__all__ = ["envariables", "DEBUG", "POSTGRES_DATABASE_URI"]

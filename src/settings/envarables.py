@@ -18,7 +18,7 @@ class Envariables(BaseSettings):
     postgres_db: str = "postgres"
 
     @property
-    def database_uri(self) -> str:
+    def postgres_database_uri(self) -> str:
         url = f"{self.postgres_driver}://\
             {self.postgres_user}:{self.postgres_password}@\
             {self.postgres_host}:{self.postgres_port}/\
