@@ -1,5 +1,5 @@
-from settings import envariables
+from settings import ENVARIABLES
 
-DEBUG = envariables.debug
+DEBUG = ENVARIABLES.DEBUG
 
-POSTGRES_DATABASE_URI = envariables.postgres_database_uri
+POSTGRES_DATABASE_URI = ENVARIABLES.postgres_database_uri

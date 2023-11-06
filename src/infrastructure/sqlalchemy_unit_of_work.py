@@ -3,7 +3,7 @@ from __future__ import annotations
 from sqlalchemy.orm import Session, sessionmaker
 
 from domain.unit_of_work import AbstractUnitOfWork
-from infrastructure.database import POSTGRES_SESSION_FACTORY
+from infrastructure.persistence.database import POSTGRES_SESSION_FACTORY
 
 
 class SQLAlchemyUnitOfWork(AbstractUnitOfWork):

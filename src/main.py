@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 
-from settings import envariables
+from settings import ENVARIABLES
 
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
-    return envariables.model_dump_json()
+    return ENVARIABLES.model_dump_json()
