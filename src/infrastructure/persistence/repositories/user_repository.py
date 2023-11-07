@@ -1,6 +1,7 @@
 from domain.entities.user_entity import UserEntity
-
-from .abstract_sqlalchemy_repository import AbstractSQLAlchemyRepository
+from infrastructure.persistence.repositories.abstract_repository import (
+    AbstractSQLAlchemyRepository,
+)
 
 
 class UserRepository(AbstractSQLAlchemyRepository[UserEntity]):

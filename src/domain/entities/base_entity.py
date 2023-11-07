@@ -26,7 +26,7 @@ class BaseEntity(Generic[E]):
         These are typically cleared after the events are published.
     """
 
-    def __init__(self):  # pylint: disable=redefined-builtin
+    def __init__(self):
         self.id: Optional[int] = None
         self.uuid: UUID = uuid4()
         self._events: List[E] = []

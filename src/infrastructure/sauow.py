@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+from typing import Type
+
 from sqlalchemy.orm import Session, sessionmaker
 
+from domain.entities.base_entity import BaseEntity
+from domain.entities.user_entity import UserEntity
+from domain.repository import AbstractRepository
 from domain.unit_of_work import AbstractUnitOfWork
 from infrastructure.persistence.database import POSTGRES_SESSION_FACTORY
+from infrastructure.persistence.repositories.user_repository import UserRepository
 
 
 class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
@@ -16,12 +22,8 @@ class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
 
     def __enter__(self) -> SQLAlchemyUnitOfWork:
         self.session = self.session_factory()
-        # Here you would initialize your specific repositories if needed,
-        # and register them with the unit of work.
-        # Example:
-        # self.register_repository(
-        # SomeEntity, SQLAlchmeyRepositoryForSomeEntity(self.session)
-        # )
+
+        self.repositories[UserEntity] = UserRepository(self.session)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -33,3 +35,13 @@ class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
 
     def rollback(self) -> None:
         self.session.rollback()
+
+    def get_repository(
+        self, entity_type: Type[BaseEntity]
+    ) -> AbstractRepository[BaseEntity]:
+        repo = self.repositories.get(entity_type)
+        if not repo:
+            raise NotImplementedError(
+                f"Repository for entity {entity_type} not implemented"
+            )
+        return repo
