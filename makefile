@@ -4,10 +4,11 @@ source_dir = src
 virtualenv = .venv
 
 cleanup:
-	@find . -type d -name '*cache*' ! -path "./$(virtualenv)/*" -exec echo Removing {} \; -exec rm -rf {} +
+	@find . -type d \( -path "./$(virtualenv)" -o -path "./docker" \) -prune -o -type d -name '*cache*' -exec echo Removing {} \; -exec rm -rf {} +
 
 tree: cleanup
-	@tree -a -I "$(virtualenv)|.git"
+	@tree -a -I "$(virtualenv)|.git|docker"
+
 
 run-app:
 	@cd ${source_dir} && uvicorn main:app --reload
