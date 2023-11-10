@@ -17,6 +17,12 @@ class Envariables(BaseSettings):
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_DB: str = "postgres"
 
+    # Redis Settings
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+    REDIS_DB: int = 0
+    REDIS_PASSWORD: str = ""
+
     @property
     def postgres_database_uri(self) -> str:
         url = f"{self.POSTGRES_DRIVER}://\
@@ -24,6 +30,10 @@ class Envariables(BaseSettings):
                 {self.POSTGRES_HOST}:{self.POSTGRES_PORT}/\
                 {self.POSTGRES_DB}"
         return url.replace(" ", "")
+
+    @property
+    def redis_database_uri(self) -> str:
+        return f"redis://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}"
 
     model_config = SettingsConfigDict(
         env_file=BASE_DIRECTORY / ".env",

@@ -27,6 +27,5 @@ build/
 *.swp
 
 # Container's data
-postgres_data/
-
+docker/
 prompt.md

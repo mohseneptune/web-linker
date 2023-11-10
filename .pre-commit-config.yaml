@@ -1,4 +1,4 @@
-exclude: '^(\\.git/|.*cache.*/|.*migrations/|docker/)'
+exclude: '^(\\.git/|.*cache.*/|.*migrations/|.*docker/)'
 
 repos:
 

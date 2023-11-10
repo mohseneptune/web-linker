@@ -3,3 +3,4 @@ from settings import ENVARIABLES
 DEBUG = ENVARIABLES.DEBUG
 
 POSTGRES_DATABASE_URI = ENVARIABLES.postgres_database_uri
+REDIS_DATABASE_URI = ENVARIABLES.redis_database_uri
