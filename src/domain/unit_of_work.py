@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Generic, Type, TypeVar
 
 from domain.entities.base_entity import BaseEntity
+from domain.messages.base_messages import BaseEvent
 from domain.repository import AbstractRepository
 
 BaseEntityT = TypeVar("BaseEntityT", bound=BaseEntity)
@@ -72,3 +73,12 @@ class AbstractUnitOfWork(ABC, Generic[BaseEntityT]):
         The registered repository instance for the given entity type.
         """
         return self.repositories[entity_type]
+
+    def collect_new_events(self) -> list[BaseEvent]:
+        """Collect new events"""
+        new_events: list[BaseEvent] = []
+        for _, repo in self.repositories.items():
+            for seen_entity in repo.seen:
+                new_events.extend(seen_entity.get_events())
+                seen_entity.clear_events()
+        return new_events

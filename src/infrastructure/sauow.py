@@ -5,10 +5,12 @@ from typing import Type
 from sqlalchemy.orm import Session, sessionmaker
 
 from domain.entities.base_entity import BaseEntity
+from domain.entities.event_entity import EventEntity
 from domain.entities.user_entity import UserEntity
 from domain.repository import AbstractRepository
 from domain.unit_of_work import AbstractUnitOfWork
 from infrastructure.persistence.database import POSTGRES_SESSION_FACTORY
+from infrastructure.persistence.repositories.event_repository import EventRepository
 from infrastructure.persistence.repositories.user_repository import UserRepository
 
 
@@ -24,6 +26,7 @@ class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
         self.session = self.session_factory()
 
         self.repositories[UserEntity] = UserRepository(self.session)
+        self.repositories[EventEntity] = EventRepository(self.session)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -31,6 +34,10 @@ class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
         self.session.close()
 
     def _commit(self) -> None:
+        event_repo = self.get_repository(EventEntity)
+        for event in self.collect_new_events():
+            event_payload = event.to_dict()
+            event_repo.add(EventEntity.create(str(type(event)), event_payload))
         self.session.commit()
 
     def rollback(self) -> None:

@@ -51,12 +51,6 @@ profile = 'black'
 warn_redundant_casts = true
 warn_unused_ignores = false
 check_untyped_defs = true
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "library.*"
-ignore_missing_imports = true
-
 
 ########## PYLINT
 [tool.pylint]

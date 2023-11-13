@@ -34,9 +34,9 @@ class MessageBus:
         if handler is None:
             raise ValueError(f"No command handler registered for {type(command)}")
         # Call the handler with the command and the UoW
-        handler(command, self.uow)
+        handler(command)
 
     def _handle_event(self, event: BaseEvent) -> None:
         handlers = self.event_handlers.get(type(event), [])
         for handler in handlers:
-            handler(event, self.uow)
+            handler(event)

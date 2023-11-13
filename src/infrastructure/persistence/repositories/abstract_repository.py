@@ -11,6 +11,7 @@ BaseEntityT = TypeVar("BaseEntityT", bound=BaseEntity)
 
 class AbstractSQLAlchemyRepository(AbstractRepository, Generic[BaseEntityT]):
     def __init__(self, session: Session) -> None:
+        super().__init__()
         self.session = session
 
     def _add(self, entity: BaseEntityT) -> None:

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Optional
 
 from domain.entities.base_entity import BaseEntity
-from domain.messages.events.user_created_event import UserCreatedEvent
 
 
 class UserEntity(BaseEntity):
@@ -27,5 +26,4 @@ class UserEntity(BaseEntity):
         a UserCreatedEvent domain event.
         """
         user = cls(username, hashed_password, **kwargs)
-        user.add_event(UserCreatedEvent(user_uuid=user.uuid))
         return user

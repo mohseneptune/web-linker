@@ -25,3 +25,9 @@ app.include_router(user_router)
 @app.get("/")
 async def root():
     return ENVARIABLES.model_dump_json()
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app="main:app", host="0.0.0.0", port=8000, reload=True)

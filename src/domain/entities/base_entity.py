@@ -49,6 +49,9 @@ class BaseEntity(Generic[E]):
         """
         return list(self._events)
 
+    def pop_event(self) -> E:
+        return self._events.pop(0)
+
     def __eq__(self, other):
         if not isinstance(other, BaseEntity):
             return NotImplemented

@@ -4,18 +4,11 @@ from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from application.handlers.command_handlers.register_user_command_handler import (
-    handle_register_user,
-)
 from application.message_bus import MessageBus
+from bootstrap import bootstrap
 from domain.messages.commands.register_user_command import RegisterUserCommand
-from infrastructure.sauow import SQLAlchemyUnitOfWork
 
-bus = MessageBus(
-    uow=SQLAlchemyUnitOfWork(),
-    event_handlers={},
-    command_handlers={RegisterUserCommand: handle_register_user},
-)
+bus: MessageBus = bootstrap()
 
 router = APIRouter(prefix="/users", tags=["users"])
 
